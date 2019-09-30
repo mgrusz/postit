@@ -1,0 +1,45 @@
+<div class="container">
+	<!-- HEADER --> 
+	<div class="row">
+		<table class="table">
+  			<thead>
+    			<tr>
+     				<th scope="col">
+						<button type="button" class="btn btn-light" (click)="createNote()" >
+							<i class="fa fa-plus"></i>	 
+						</button>
+					</th>
+      				<th scope="col">Notes</th>
+    			</tr>
+			</thead>
+		</table>
+	</div>
+	<!-- NOTES -->
+	<div class="row">	
+		<!-- NO NOTES MSG -->
+		<p *ngIf="this.notes.length === 0">There are no notes to display!</p>
+		<!-- CARD -->
+		<div class="card-deck">
+			<div *ngFor="let note of notes" class="card text-white bg-warning mb-3">  
+				<div class="card-header" >
+					<input type="text" class="input-label-lg"
+						[(ngModel)]="note.name"
+						(change)="updateNote(note)"
+						maxlength="18"
+						style="width: 80%" />
+					<a (click)="deleteNote(note)" class="pull-right text-danger" >
+						<i class="fa fa-trash"></i>
+					</a>
+				</div>
+				<div class="card-body">
+					<textarea class="input-label" style="width: 100%" rows="5"
+						(change)="updateNote(note)"
+						[(ngModel)]="note.text" maxlength="200"></textarea>
+				</div>
+				<div class="card-footer">
+      				<small class="text-muted">{{note.modifDate | date:'dd-MM-yyy HH:mm:ss'}}</small>
+    			</div>  
+			</div>
+		</div>
+	</div>
+</div>
